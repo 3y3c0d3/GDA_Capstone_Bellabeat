@@ -12,7 +12,13 @@ The case study follows the six step data analysis process:
 ### 📋 Share
 ### 🧗‍♀️ Act
 # Scenario
-Since it was founded in 2013, Bellabeat has grown rapidly and quickly positioned itself as a tech-driven wellness company for women. The company has 5 focus products: bellabeat app, leaf, time, spring and bellabeat membership. Bellabeat is a successful small company, but they have the potential to become a larger player in the global smart device market. Our team have been asked to analyze smart device data to gain insight into how consumers are using their smart devices. The insights we discover will then help guide marketing strategy for the company
+You are a junior data analyst working on the marketing analyst team at Bellabeat, a high-tech manufacturer of health-focused
+ products for women. Bellabeat is a successful small company, but they have the potential to become a larger player in the
+ global sma device market. Urška Sršen, cofounder and Chief Creative O cer of Bellabeat, believes that analyzing sma
+ device tness data could help unlock new growth oppo unities for the company. You have been asked to focus on one of
+ Bellabeat’s products and analyze sma device data to gain insight into how consumers are using their sma devices. The
+ insights you discover will then help guide marketing strategy for the company. You will present your analysis to the Bellabeat
+ executive team along with your high-level recommendations for Bellabeat’s marketing strategy
 # 1. Ask
 ###  BUSINESS TASK: Analyze Fitbit data to gain insight and help guide marketing strategy for Bellabeat to grow as a global player
 Primary stakeholders: Urška Sršen and Sando Mur, executive team members.
