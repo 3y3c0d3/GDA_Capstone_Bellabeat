@@ -33,7 +33,7 @@ The dataset has 18 CSVs and follows a ROCCC outline:
 
 **Cited:** Unknown.  
 
- The dataset has limitations:
+ #### The dataset has limitations: ####
 
 Only 30 user data is available. The central limit theorem general rule of n≥30 applies and we can use the t test for statstic reference. However, a larger sample size is preferred for the analysis.
 Upon further investigation with n_distinct() to check for unique user Id, the set has 33 user data from daily activity, 24 from sleep and only 8 from weight. There are 3 extra users and some users did not record their data for tracking daily activity and sleep.
