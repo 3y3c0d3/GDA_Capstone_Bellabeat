@@ -63,7 +63,7 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
 
  ## LOADED DATA 
 
- ![Load Data](images/BigQuery-Loaded_Daily_Activity_3.12-4.12.png) 
+ ![Load Data](images/BigQuery/Loaded_Daily_Activity_3.12-4.12.png) 
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -71,20 +71,20 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
  ## TOTAL UNIQUE IDS
 
 
-![Count Distinct IDs](/images/BigQuery-Count_Distinct_IDs_Query.png) 
+![Count Distinct IDs](/images/BigQuery/Count_Distinct_IDs_Query.png) 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
-![Count Distinct IDs Result](/images/BigQuery-Count_Distinct_IDs_Query_Result_of_35.png)
+![Count Distinct IDs Result](/images/BigQuery/Count_Distinct_IDs_Query_Result_of_35.png)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 ## TOTAL STEPS TOP 10
 
- ![Total Steps](/images/BigQuery-Query_Total_Steps_per_user_Top10.png) 
+ ![Total Steps](/images/BigQuery/Query_Total_Steps_per_user_Top10.png) 
 
  ---------------------------------------------------------------------------------------------------------------------------------------------------
- ![Total Steps Results](/images/BigQuery-Query_Total_Steps_per_user_Top10_Result.png)  
+ ![Total Steps Results](/images/BigQuery/Query_Total_Steps_per_user_Top10_Result.png)  
  
  ---------------------------------------------------------------------------------------------------------------------------------------------------
  ----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -92,11 +92,11 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
   ## AVG ACTIVE MINUTES 
 
   
-  ![Avg Active Minutes](/images/BigQuery-Query_Avg_Active_Minutes_per_user.png) 
+  ![Avg Active Minutes](/images/BigQuery/Query_Avg_Active_Minutes_per_user.png) 
 
  -------------------------------------------------------------------------------------------------------------------------------------------------- 
  **(Ran code without "limit 10" in order to retrieve all users):**
-  ![Avg Active Minutes Result](images/BigQuery-Query_Avg_Active_Minutes_per_user_Result_without_limit.png)
+  ![Avg Active Minutes Result](images/BigQuery/Query_Avg_Active_Minutes_per_user_Result_without_limit.png)
   
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -105,6 +105,6 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
 
 ### Calculating the percent of days users achieved their 10,000 step goal 
 
- ![Percent of users met step goal](/images/BigQuery-Query_percent_days_user_met_step_goal.png) 
+ ![Percent of users met step goal](/images/BigQuery/Query_percent_days_user_met_step_goal.png) 
  
-  ![Avg steps by day of week](/images/BigQuery-Query_step_trend_by_day_of_week.png)
+  ![Avg steps by day of week](/images/BigQuery/Query_step_trend_by_day_of_week.png)
