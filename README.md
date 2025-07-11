@@ -55,7 +55,7 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
  beauty, and mindfulness based on their lifestyle and goals. 
  
 
- **In BigQuery, I began by searching some basic information and initial findings such as number of unique IDs, total steps, and avg active minutes:** 
+ ### **In BigQuery, I began by searching some basic information and initial findings such as number of unique IDs, total steps, and avg active minutes:** 
 
  ## TOTAL UNIQUE IDS
 
