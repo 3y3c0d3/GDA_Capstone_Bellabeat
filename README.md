@@ -66,5 +66,6 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
 
 ## TOTAL STEPS 
 
- ![Total Steps](/images/BigQuery-Query_Total_Steps_Top_10.png)
+ ![Total Steps](/images/BigQuery-Query_Total_Steps_per_user_Top_10.png)
+ ![Total Steps](/images/BigQuery-Query_Total_Steps_per_user_Top_10_Results.png)
   
