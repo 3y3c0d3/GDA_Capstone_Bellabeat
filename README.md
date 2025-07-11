@@ -53,9 +53,12 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
  **○ Bellabeat membership:** Bellabeat also o ers a subscription-based membership program for users.
  Membership gives users 24/7 access to fully personalized guidance on nutrition, activity, sleep, health and
  beauty, and mindfulness based on their lifestyle and goals. 
- 
 
- ### **In BigQuery, I began by searching some basic information and initial findings such as number of unique IDs, total steps, and avg active minutes:** 
+  ----------------------------------------------------------------------------------------------------------------------------------------
+
+ ### **In BigQuery, I began by searching some basic information and initial findings such as number of unique IDs, total steps, and avg active minutes:**  
+
+  -----------------------------------------------------------------------------------------------------------------------------------------
 
  ## TOTAL UNIQUE IDS
 
