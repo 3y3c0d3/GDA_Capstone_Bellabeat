@@ -55,9 +55,10 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
  beauty, and mindfulness based on their lifestyle and goals. 
  
 
+ In BigQuery, I began by searching some basic information and initial findings such as number of unique IDs, total steps, and avg active minutes: 
+
  
-For the 8 user data for weight, 5 users manually entered their weight and 3 recorded via a connected wifi device (eg: wifi scale).
-Most data is recorded from Tuesday to Thursday, which may not be comprehensive enough to form an accurate analysis. 
 
 
 ![Count Distinct IDs](/images/BigQuery-Count_Dinstinct_IDs_Query.png)
+![Count Distinct IDs Result](/images/BigQuery-Count_
