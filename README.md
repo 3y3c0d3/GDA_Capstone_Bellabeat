@@ -10,7 +10,8 @@ The case study follows the six step data analysis process:
 ### 🛠 Process
 ### 📊 Analyze
 ### 📋 Share
-### 🧗‍♀️ Act
+### 🧗‍♀️ Act 
+
 # Scenario
 You are a junior data analyst working on the marketing analyst team at Bellabeat, a high-tech manufacturer of health-focused
  products for women. Bellabeat is a successful small company, but they have the potential to become a larger player in the
@@ -56,4 +57,7 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
 
  
 For the 8 user data for weight, 5 users manually entered their weight and 3 recorded via a connected wifi device (eg: wifi scale).
-Most data is recorded from Tuesday to Thursday, which may not be comprehensive enough to form an accurate analysis.
+Most data is recorded from Tuesday to Thursday, which may not be comprehensive enough to form an accurate analysis. 
+
+
+![Count Distinct IDs](images/BigQuery-Count_Distinct IDs Query.png)
