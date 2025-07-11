@@ -54,7 +54,7 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
  Membership gives users 24/7 access to fully personalized guidance on nutrition, activity, sleep, health and
  beauty, and mindfulness based on their lifestyle and goals. 
 
-  ----------------------------------------------------------------------------------------------------------------------------------------
+  **----------------------------------------------------------------------------------------------------------------------------------------**
 
  ### **In BigQuery, I began by searching some basic information and initial findings such as number of unique IDs, total steps, and avg active minutes:**  
 
@@ -69,20 +69,23 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 ![Count Distinct IDs Result](/images/BigQuery-Count_Distinct_IDs_Query_Result_of_35.png)
 
-
+**-----------------------------------------------------------------------------------------------------------------------------------------------**
 ## TOTAL STEPS 
 
  ![Total Steps](/images/BigQuery-Query_Total_Steps_per_user_Top10.png) 
 
-  ### RESULT
- ![Total Steps Results](/images/BigQuery-Query_Total_Steps_per_user_Top10_Result.png) 
-
+ ---------------------------------------------------------------------------------------------------------------------------------------------------
+ ---------------------------------------------------------------------------------------------------------------------------------------------------
+ ![Total Steps Results](/images/BigQuery-Query_Total_Steps_per_user_Top10_Result.png)  
+ 
+ **----------------------------------------------------------------------------------------------------------------------------------------------**
 
   ## AVG ACTIVE MINUTES 
 
   
   ![Avg Active Minutes](/images/BigQuery-Query_Avg_Active_Minutes_per_user.png) 
 
- ### RESULT
+ --------------------------------------------------------------------------------------------------------------------------------------------------
+ --------------------------------------------------------------------------------------------------------------------------------------------------
   ![Avg Active Minutes Result](images/BigQuery-Query_Avg_Active_Minutes_per_user_Result_without_limit.png)
   
