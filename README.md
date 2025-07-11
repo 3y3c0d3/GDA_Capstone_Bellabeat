@@ -61,4 +61,4 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
 
 
 ![Count Distinct IDs](/images/BigQuery-Count_Dinstinct_IDs_Query.png)
-![Count Distinct IDs Result](/images/BigQuery-Count_
+![Count Distinct IDs Result](/images/BigQuery-Count_Din
