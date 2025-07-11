@@ -55,17 +55,19 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
  beauty, and mindfulness based on their lifestyle and goals. 
  
 
- In BigQuery, I began by searching some basic information and initial findings such as number of unique IDs, total steps, and avg active minutes: 
+ **In BigQuery, I began by searching some basic information and initial findings such as number of unique IDs, total steps, and avg active minutes:** 
 
  ## TOTAL UNIQUE IDS
 
 
-![Count Distinct IDs](/images/BigQuery-Query_Total_Steps_per_user_Top10.png)
-![Count Distinct IDs Result](/images/BigQuery-Count_Distinct_IDs_Query_Result_of_35.png)
+![Count Distinct IDs](/images/BigQuery-Query_Total_Steps_per_user_Top10.png) 
+ 
+![Count Distinct IDs Result](/images/BigQuery-Query_Total_Steps_per_user_Top10_Result.png)
 
 
 ## TOTAL STEPS 
 
- ![Total Steps](/images/BigQuery-Query_Total_Steps_per_user_Top10.png)
+ ![Total Steps](/images/BigQuery-Query_Total_Steps_per_user_Top10.png) 
+  
  ![Total Steps Results](/images/BigQuery-Query_Total_Steps_per_user_Top10_Results.png)
   
