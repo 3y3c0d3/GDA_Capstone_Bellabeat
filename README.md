@@ -76,12 +76,9 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
 
   ## AVG ACTIVE MINUTES 
 
-  ![Avg Active Minutes](/images/BigQuery-Query
-
-
-  ### RESULT 
+  
   ![Avg Active Minutes](/images/BigQuery-Query_Avg_Active_Minutes_per_user.png) 
 
- 
+ ### RESULT
   ![Avg Active Minutes Result](images/BigQuery-Query_Avg_Active_Minutes_per_user_Result_without_limit.png)
   
