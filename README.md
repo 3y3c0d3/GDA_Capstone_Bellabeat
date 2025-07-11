@@ -60,4 +60,4 @@ For the 8 user data for weight, 5 users manually entered their weight and 3 reco
 Most data is recorded from Tuesday to Thursday, which may not be comprehensive enough to form an accurate analysis. 
 
 
-![Count Distinct IDs](GDA_Capstone_Bellabeat/images/BigQuery-Count_Dinstinct_IDs_Query.png)
+![Count Distinct IDs](/images/BigQuery-Count_Dinstinct_IDs_Query.png)
