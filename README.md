@@ -57,8 +57,14 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
 
  In BigQuery, I began by searching some basic information and initial findings such as number of unique IDs, total steps, and avg active minutes: 
 
- 
+ ## TOTAL UNIQUE IDS
 
 
 ![Count Distinct IDs](/images/BigQuery-Count_Distinct_IDs_Query.png)
 ![Count Distinct IDs Result](/images/BigQuery-Count_Distinct_IDs_Query_Result_of_35.png)
+
+
+## TOTAL STEPS 
+
+ ![Total Steps](/images/BigQuery-Query_Total_Steps_Top_10.png)
+  
