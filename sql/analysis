@@ -25,13 +25,15 @@ Id
 ORDER BY
 pct_goal_met DESC
 
+What days of the week are users taking the most steps?
+
 -- STEP TREND ORDERED BY DAY OF WEEK --
 
 SELECT
 FORMAT_DATE('%A', ActivityDate) AS day_of_week,
-ROUND(AVG(TotalSteps)) AS avg_steps
+ROUND(AVG(TotalSteps)) AS total_steps
 FROM endless-ripple-465615-b4.Daily_Activity. Activity'
 GROUP BY
 day_of_week
 ORDER BY
-avg_steps DESC
+total_steps DESC
