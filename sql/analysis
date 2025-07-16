@@ -25,7 +25,7 @@ Id
 ORDER BY
 pct_goal_met DESC
 
-What days of the week are users taking the most steps?
+What days of the week are users most active?
 
 -- STEP TREND ORDERED BY DAY OF WEEK --
 
