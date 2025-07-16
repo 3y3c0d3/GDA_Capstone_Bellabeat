@@ -1,0 +1,19 @@
+-- COUNT UNIQUE IDS --
+
+SELECT COUNT(DISTINCT id) AS unique_user_count
+
+FROM 'endless-ripple-465615-b4.Daily_Activity.Activity'
+
+-- TOTAL STEPS PER USER TOP 10 --
+
+SELECT
+Id
+SUM(TotalSteps) AS total_steps
+FROM endless-ripple-465615-b4.Daily_Activity.Activity
+GROUP BY
+Td
+ORDER BY
+total_steps DESC
+LIMIT 10;
+
+
