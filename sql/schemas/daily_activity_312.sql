@@ -4,7 +4,7 @@ Id NULLABLE	 INTEGER
 ActivityDate	NULLABLE	DATE	
 TotalSteps	NULLABLE	INTEGER	
 TotalDistance 	NULLABLE	FLOAT	
-TrackerDistance 	NULLABLE	FLOAT	
+TrackerDistance	NULLABLE	FLOAT	
 LoggedActivities  Distance	NULLABLE	FLOAT	
 VeryActiveDistance	NULLABLE	FLOAT	
 ModeratelyActive  Distance	NULLABLE	FLOAT	
