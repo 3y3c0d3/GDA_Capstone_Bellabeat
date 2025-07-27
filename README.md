@@ -115,4 +115,4 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
 
   --------------------------------------------------------------------------------------------------------------------------------------------------
   ### Counting total column count for entire uploaded data set
-  ![Total column count by schema](/images/BigQuery/BigQuery - access all data schema id check.png)
+  ![Total column count by schema](/images/BigQuery/access_all_data_schema_id_check.png)
