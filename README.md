@@ -108,3 +108,7 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
  ![Percent of users met step goal](/images/BigQuery/Query_percent_days_user_met_step_goal.png) 
  
   ![Avg steps by day of week](/images/BigQuery/Query_step_trend_by_day_of_week.png)
+
+  --------------------------------------------------------------------------------------------------------------------------------------------------
+  ### Counting total column count for entire uploaded data set
+  
