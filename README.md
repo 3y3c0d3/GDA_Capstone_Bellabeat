@@ -106,9 +106,13 @@ You are a junior data analyst working on the marketing analyst team at Bellabeat
 ### Calculating the percent of days users achieved their 10,000 step goal 
 
  ![Percent of users met step goal](/images/BigQuery/Query_percent_days_user_met_step_goal.png) 
+
+ -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+ ### Average steps by day of the week
  
   ![Avg steps by day of week](/images/BigQuery/Query_step_trend_by_day_of_week.png)
 
   --------------------------------------------------------------------------------------------------------------------------------------------------
   ### Counting total column count for entire uploaded data set
-  
+  ![Total column count by schema](/images/BigQuery/BigQuery_-_access_all_data_schema_id_check.png)
