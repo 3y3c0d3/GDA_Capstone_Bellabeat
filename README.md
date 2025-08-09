@@ -1,94 +1,245 @@
-## Project Overview
-This repository contains my capstone project for the Bellabeat Data Analysis case study. The goal of this project is to analyze fitness and health data collected by Bellabeat devices to derive insights that could help improve user experience, engagement, and product offerings. The project uses exploratory data analysis (EDA), visualizations, and statistical techniques to uncover patterns and trends in the dataset.
+Bellabeat Google Capstone — Smart Device Usage Analysis 🌿
 
-## Table of Contents
-Project Overview
+   
 
-Data Description
+This project is my Google Data Analytics Capstone, following the official 6-step process (Ask → Prepare → Process → Analyze → Share → Act).
+I analyzed Fitbit smart device usage data to uncover user activity, sleep, and calorie patterns, explored correlations, built a simple predictive model, and created marketing recommendations for Bellabeat.
 
-Key Insights
 
-Technologies Used
+---
 
-Installation
+1️⃣ ASK — Defining the Business Task
 
-Usage
+Goal: Analyze non-Bellabeat smart device usage data to discover user habits and provide high-level marketing recommendations for Bellabeat.
 
-Analysis
+Stakeholders:
 
-Conclusion
+Urška Sršen — Cofounder & Chief Creative Officer
 
-License
+Sando Mur — Cofounder & Mathematician
 
-## Data Description
-The dataset used in this project consists of health and fitness data collected from users of Bellabeat devices. The data includes the following variables:
+Bellabeat Marketing Analytics Team
 
-**Activity data:** step count, calories burned, active minutes, etc.
 
-**Sleep data:** hours of sleep, sleep stages, etc.
+Guiding Questions:
 
-**Health data:** heart rate, stress levels, etc.
+1. What are the key trends in steps, sleep, calories, and activity intensity?
 
-**User demographics:** age, gender, height, weight, etc.
 
-The data has been cleaned, processed, and transformed for analysis. Each file and its contents are described in detail below.
+2. How do usage patterns differ between weekdays and weekends?
 
-dailyActivity.csv: Contains activity metrics (steps, calories, etc.) by user.
 
-sleepDay.csv: Contains sleep quality and duration data.
+3. Are there distinct types of users based on activity level?
 
-heart_rate.csv: Contains heart rate metrics
 
-## Technologies Used
-The following technologies were used in this project:
+4. How do metrics like steps, calories, and sleep relate to each other?
 
-Python: Main programming language for data analysis and visualization.
 
-Libraries: Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn
+5. Which insights can help shape Bellabeat’s marketing strategy?
 
-Jupyter Notebooks: For data exploration and presentation.
 
-GitHub: Version control and collaboration.
 
-## Analysis
-**Data Cleaning**
-This data was cleaned and processed using Google Sheets, R, Python, BigQuery, and Tableau.
 
-Before diving into the analysis, the data was cleaned and pre-processed to handle missing values and inconsistencies. Key steps included:
+---
 
-Dropping or imputing missing values (e.g., replacing missing sleep data with the mean value).
+2️⃣ PREPARE — Understanding the Data
 
-Filtering out irrelevant or duplicated entries.
+Dataset:
+FitBit Fitness Tracker Data (Kaggle) — 18 CSV files containing daily, hourly, and minute-level data from ~30 anonymous users in 2016.
 
-Normalizing activity data to account for different time zones and units
+Tools Used:
 
-**Key visualizations** (e.g., histograms, scatter plots, correlation matrices).
+Google BigQuery — storage, cleaning, joins, and SQL analysis
 
-**Key Findings**
-Through exploratory data analysis (EDA), I uncovered the following insights:
+Python (pandas, seaborn, scikit-learn) — exploratory analysis, correlations, simple model
 
-Active Users Sleep Better: The data shows a strong correlation between high step counts (10,000+ steps per day) and better sleep quality. This could suggest that users who maintain high activity levels may experience more restful sleep.
+Tableau — dashboard and visualization for stakeholders
 
-Stress Reduces Engagement: Users who report high stress levels seem to have lower engagement with the device, which may suggest that Bellabeat could offer stress management features to improve user retention and engagement.
 
-Activity is Higher on Weekdays: A clear trend was found where users tend to be more active on weekdays, likely due to the structure of the workweek. This could inform marketing strategies that target weekday behavior.
+Data Limitations:
 
-These insights can inform potential product improvements and user engagement strategies for Bellabeat
+Small sample size (≈30 users) → not representative of all smart device users
 
-## Recommendations
-Based on these insights, the following recommendations were made:
+No demographic details (age, gender, location, income)
 
-Feature Improvements: Introduce features to help users track and manage stress, which could potentially increase engagement.
+Data is from 2016 → usage patterns may have changed
 
-Engagement Strategies: Develop strategies to encourage weekend activity and maintain user engagement, possibly through challenges or rewards.
+Some self-reported metrics (e.g., sleep) may be inaccurate
 
-Personalization: Suggest personalized recommendations for users based on their activity and sleep patterns (e.g., providing tailored sleep tips for high-activity users)
 
-Conclusion
-This project analyzed fitness and health data from Bellabeat’s devices and uncovered valuable insights about user behavior. By focusing on activity, sleep, and stress, I identified potential areas for improving both user experience and engagement. 
-The insights also suggest opportunities for new features that could help Bellabeat’s users optimize their health and well-being.
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+---
 
-Google Colab: Optional, for cloud-based execution of notebooks.
+3️⃣ PROCESS — Cleaning & Merging Data
+
+I focused on two key CSVs:
+
+dailyActivity_merged.csv — steps, distances, active/sedentary minutes, calories
+
+sleepDay_merged.csv — minutes asleep, time in bed
+
+
+Cleaning Steps in BigQuery:
+
+Checked for nulls and duplicates
+
+Standardized date formats
+
+Removed duplicate rows
+
+Joined daily activity and sleep data on user ID and date
+
+Exported the cleaned dataset for analysis
+
+
+The result: daily_activity_sleep_cleaned.csv — my primary analysis dataset.
+
+
+---
+
+4️⃣ ANALYZE — Finding Insights
+
+Descriptive Statistics:
+
+Average daily steps, calories burned, sedentary minutes, and minutes asleep
+
+Distribution of activity levels across days
+
+
+Key Analyses:
+
+Weekday vs. Weekend Trends — calculated average steps and sleep by day of week
+
+Correlation Analysis — examined relationships between steps, calories, sedentary minutes, and sleep
+
+Simple Predictive Model — linear regression to predict calories burned from steps
+
+
+Notable Findings:
+
+Strong positive correlation between steps and calories burned
+
+Sedentary minutes make up the largest portion of the day for most users
+
+Potential link between higher activity and improved sleep
+
+Step counts vary across the week — possible drop on weekends
+
+
+
+---
+
+5️⃣ SHARE — Visualizing Results
+
+I built a Tableau Dashboard to present:
+
+KPI Tiles: Avg. daily steps, sleep minutes, sedentary minutes
+
+Bar Chart: Avg. steps by day of week
+
+Scatter Plot: Very active minutes vs. minutes asleep
+
+Pie Chart: Distribution of users by activity segment (Sedentary / Lightly Active / Fairly Active / Very Active)
+
+Tree Map: Average daily minutes spent in different activity intensities
+
+
+These visuals allow stakeholders to filter by user segment and explore trends interactively.
+
+
+---
+
+6️⃣ ACT — Recommendations
+
+Based on the analysis, I recommend:
+
+1. Break up sedentary time
+Introduce “move reminders” in the Bellabeat app to encourage users to stand and move throughout the day.
+
+
+2. Link activity to sleep quality
+Launch educational content: “Move More, Sleep Better”, highlighting the connection between activity and rest.
+
+
+3. Weekend activity challenges
+Create a “Weekend Warrior” campaign with in-app challenges to maintain activity levels on weekends.
+
+
+4. Personalized goals by user segment
+Use onboarding data to classify users and send tailored step goals and nudges.
+
+
+
+> All recommendations are made acknowledging dataset limitations (size, demographics, year collected).
+
+
+
+
+---
+
+📂 Project Structure
+
+bellabeat_google_capstone/
+├── README.md
+├── 00_data/
+│ ├── original_data/ # Raw Kaggle CSVs
+│ └── processed_data/ # Cleaned datasets
+├── 01_scripts/
+│ ├── sql/ # BigQuery SQL scripts
+│ └── python/ # Python analysis scripts/notebooks
+├── 02_visualizations/
+│ ├── images/ # Charts & plots
+│ └── Bellabeat_Dashboard.twbx # Tableau dashboard
+└── 03_report/
+    └── Bellabeat_Case_Study_Presentation.pptx
+
+
+---
+
+🔁 Reproducibility
+
+To reproduce my results:
+
+1. BigQuery
+
+Upload the original CSVs to your dataset
+
+Run the SQL cleaning/merge script
+
+Export the cleaned table as CSV
+
+
+
+2. Python
+
+Load the cleaned CSV
+
+Run descriptive statistics, correlations, and the regression model
+
+Save visualizations to /02_visualizations/images/
+
+
+
+3. Tableau
+
+Connect to the cleaned CSV
+
+Recreate the dashboard with KPIs, trends, and user segments
+
+
+
+
+
+---
+
+📜 License & Attribution
+
+Code: MIT License
+
+Data: Fitbit Fitness Tracker Data (Kaggle, educational use)
+
+
+
+---
+
+This project showcases data cleaning, SQL analysis, Python EDA, correlation analysis, regression modeling, and interactive dashboarding — all following Google’s structured analysis process
