@@ -94,31 +94,10 @@ USING (Id, ActivityDate);
 
 -- Ensure uniqueness (one row per user per day)
 CREATE OR REPLACE TABLE `endless-ripple-465615-b4.Bellabeat.daily_activity_sleep` AS
-SELECT AS VALUE t
+SELECT *
 FROM (
   SELECT
-    STRUCT(
-      Id,
-      ActivityDate,
-      TotalSteps,
-      TotalDistance,
-      TrackerDistance,
-      LoggedActivitiesDistance,
-      VeryActiveDistance,
-      ModeratelyActiveDistance,
-      LightActiveDistance,
-      SedentaryActiveDistance,
-      VeryActiveMinutes,
-      FairlyActiveMinutes,
-      LightlyActiveMinutes,
-      SedentaryMinutes,
-      Calories,
-      TotalActiveMinutes,
-      TotalSleepRecords,
-      TotalMinutesAsleep,
-      TotalTimeInBed,
-      TotalTimeToFallAsleep
-    ) AS t,
+    *,
     ROW_NUMBER() OVER (PARTITION BY Id, ActivityDate ORDER BY ActivityDate) AS rn
   FROM `endless-ripple-465615-b4.Bellabeat.daily_activity_sleep`
 )
