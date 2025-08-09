@@ -9,14 +9,14 @@
 -- 1) Quick health checks
 SELECT
   'dailyActivity' AS table_name,
-  COUNT(*) AS rows,
+  COUNT(*) AS row_count,
   SUM(CASE WHEN TotalSteps IS NULL THEN 1 ELSE 0 END) AS null_TotalSteps,
   SUM(CASE WHEN Calories IS NULL THEN 1 ELSE 0 END) AS null_Calories
 FROM `endless-ripple-465615-b4.Bellabeat.dailyActivity`;
 
 SELECT
   'sleepDay' AS table_name,
-  COUNT(*) AS rows,
+  COUNT(*) AS row_count,
   SUM(CASE WHEN TotalMinutesAsleep IS NULL THEN 1 ELSE 0 END) AS null_MinAsleep,
   SUM(CASE WHEN TotalTimeInBed IS NULL THEN 1 ELSE 0 END) AS null_TimeInBed
 FROM `endless-ripple-465615-b4.Bellabeat.sleepDay`;
@@ -151,7 +151,7 @@ FROM `endless-ripple-465615-b4.Bellabeat.daily_activity_sleep`
 GROUP BY Id;
 
 -- 5) QA
-SELECT 'daily_activity_sleep' AS table_name, COUNT(*) AS rows
+SELECT 'daily_activity_sleep' AS table_name, COUNT(*) AS row_count
 FROM `endless-ripple-465615-b4.Bellabeat.daily_activity_sleep`;
 
 SELECT
