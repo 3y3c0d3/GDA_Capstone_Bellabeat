@@ -1,1 +1,152 @@
-Python
+import pandas as pd
+import numpy as np
+from pathlib import Path
+
+# 1) Load from Downloads
+base = Path(r"C:\Users\rcoul\Downloads")
+act = pd.read_csv(base / "bellabeat_activity_clean.csv")
+slp = pd.read_csv(base / "bellabeat_sleep_clean.csv")
+
+print("Activity Data:", act.shape)
+print("Sleep Data :", slp.shape)
+
+# 2) Minimal normalize + date parsing
+act.columns = [c.strip() for c in act.columns]
+slp.columns = [c.strip() for c in slp.columns]
+
+to_date = lambda s: pd.to_datetime(s, errors="coerce").dt.date
+
+if "ActivityDate" not in act.columns:
+    raise ValueError("Activity file must contain 'ActivityDate'")
+act["ActivityDate"] = to_date(act["ActivityDate"])
+
+if "SleepDay" in slp.columns:
+    slp["ActivityDate"] = to_date(slp["SleepDay"])
+elif "ActivityDate" in slp.columns:
+    slp["ActivityDate"] = to_date(slp["ActivityDate"])
+else:
+    raise ValueError("Sleep file must contain 'SleepDay' or 'ActivityDate'")
+
+# ensure Id is numeric + drop empties
+for df in (act, slp):
+    if "Id" not in df.columns:
+        raise ValueError("Both files need an 'Id' column")
+    df["Id"] = pd.to_numeric(df["Id"], errors="coerce").astype("Int64")
+
+act = (act.dropna(subset=["Id","ActivityDate"])
+          .sort_values(["Id","ActivityDate"])
+          .drop_duplicates(subset=["Id","ActivityDate"], keep="first"))
+slp = (slp.dropna(subset=["Id","ActivityDate"])
+          .sort_values(["Id","ActivityDate"])
+          .drop_duplicates(subset=["Id","ActivityDate"], keep="first"))
+
+# 3) Create MERGED table (this variable must exist before saving!)
+sleep_cols = ["Id","ActivityDate","TotalMinutesAsleep","TotalTimeInBed"]
+for c in ["TotalMinutesAsleep","TotalTimeInBed"]:
+    if c in slp.columns:
+        slp[c] = pd.to_numeric(slp[c], errors="coerce")
+
+merged = pd.merge(
+    act,
+    slp[[c for c in sleep_cols if c in slp.columns]],
+    on=["Id","ActivityDate"],
+    how="left"
+)
+
+print("Merged:", merged.shape)
+print(merged.head(3))
+
+# 4) Now save MERGED
+merged_path = base / "daily_activity_sleep_cleaned.csv"
+merged.to_csv(merged_path, index=False)
+print(f"Saved merged dataset → {merged_path}")
+
+# ---------- ANALYZE: Descriptives, Weekday trends, Correlation, Simple model ----------
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+
+# 1) Descriptive stats
+num_cols = [c for c in [
+    "TotalSteps","TotalDistance","TrackerDistance","Calories",
+    "VeryActiveMinutes","FairlyActiveMinutes","LightlyActiveMinutes","SedentaryMinutes",
+    "TotalMinutesAsleep","TotalTimeInBed"
+] if c in merged.columns]
+
+print("\n=== Descriptive statistics ===")
+print(merged[num_cols].describe().T.round(2))
+
+# 2) Weekday trends
+merged["ActivityDate"] = pd.to_datetime(merged["ActivityDate"])
+merged["day_of_week"] = merged["ActivityDate"].dt.day_name()
+weekday = (merged.groupby("day_of_week")[["TotalSteps","TotalMinutesAsleep","SedentaryMinutes","Calories"]]
+                 .mean()
+                 .reindex(["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"])
+                 .round(1))
+print("\n=== Averages by weekday ===")
+print(weekday)
+
+# Plot: Avg steps by weekday
+plt.figure(figsize=(9,5))
+weekday["TotalSteps"].plot(kind="bar")
+plt.title("Average Steps by Day of Week")
+plt.ylabel("Average Steps")
+plt.xlabel("")
+plt.tight_layout()
+plt.show()
+
+# 3) Correlation matrix
+corr_cols = [c for c in [
+    "TotalSteps","TotalDistance","VeryActiveMinutes",
+    "SedentaryMinutes","Calories","TotalMinutesAsleep"
+] if c in merged.columns]
+corr = merged[corr_cols].corr().round(2)
+print("\n=== Correlation matrix ===")
+print(corr)
+
+# Heatmap (matplotlib only)
+plt.figure(figsize=(8,6))
+plt.imshow(corr, interpolation="nearest")
+plt.xticks(range(len(corr_cols)), corr_cols, rotation=45, ha="right")
+plt.yticks(range(len(corr_cols)), corr_cols)
+for (i, j), val in np.ndenumerate(corr.values):
+    plt.text(j, i, f"{val:.2f}", ha='center', va='center')
+plt.title("Correlation Matrix of Fitbit Metrics")
+plt.colorbar()
+plt.tight_layout()
+plt.show()
+
+# 4) Simple model: Calories ~ TotalSteps
+if {"TotalSteps","Calories"}.issubset(merged.columns):
+    model_df = merged[["TotalSteps","Calories"]].dropna()
+    model_df["TotalSteps"] = pd.to_numeric(model_df["TotalSteps"], errors="coerce")
+    model_df["Calories"] = pd.to_numeric(model_df["Calories"], errors="coerce")
+    model_df = model_df.dropna()
+
+    X = model_df[["TotalSteps"]].values
+    y = model_df["Calories"].values
+
+    lin = LinearRegression().fit(X, y)
+    pred = lin.predict(X)
+    r2 = r2_score(y, pred)
+
+    print(f"\n=== Linear Model ===")
+    print(f"Calories ≈ {lin.intercept_:.2f} + {lin.coef_[0]:.4f} × TotalSteps")
+    print(f"R² = {r2:.3f}")
+
+    # Scatter + regression line
+    order = np.argsort(X.flatten())
+    plt.figure(figsize=(9,6))
+    plt.scatter(model_df["TotalSteps"], model_df["Calories"], alpha=0.5)
+    plt.plot(X.flatten()[order], pred[order])
+    plt.title("Calories vs. Total Steps (Linear Fit)")
+    plt.xlabel("Total Steps")
+    plt.ylabel("Calories")
+    plt.tight_layout()
+    plt.show()
+else:
+    print("\n[skip] Need both 'TotalSteps' and 'Calories' columns for the model.")
+
+    
