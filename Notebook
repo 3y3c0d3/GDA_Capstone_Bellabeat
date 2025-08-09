@@ -1,118 +1,205 @@
-# GDA_Capstone_Bellabeat
-Author: Ryan C   
-Date: 7/8/2025  
+# The Business Task
+First, let's restate the stakeholders' goal: Analyze smart device usage data to gain insights into how consumers are using their non-Bellabeat smart devices. Provide high-level recommendations for Bellabeat's marketing strategy.
 
-This is a case study on Bellabeat for the Google Data Analytics Capstone project
-The case study follows the six step data analysis process:
+# Step 1: ASK
+This phase is about understanding the project objectives and defining what questions we need to answer.
 
-### ❓ Ask
-### 💻 Prepare
-### 🛠 Process
-### 📊 Analyze
-### 📋 Share
-### 🧗‍♀️ Act 
+Stakeholders:
 
-# Scenario
-You are a junior data analyst working on the marketing analyst team at Bellabeat, a high-tech manufacturer of health-focused
- products for women. Bellabeat is a successful small company, but they have the potential to become a larger player in the
- global sma device market. Urška Sršen, cofounder and Chief Creative O cer of Bellabeat, believes that analyzing sma
- device tness data could help unlock new growth oppo unities for the company. You have been asked to focus on one of
- Bellabeat’s products and analyze sma device data to gain insight into how consumers are using their sma devices. The
- insights you discover will then help guide marketing strategy for the company. You will present your analysis to the Bellabeat
- executive team along with your high-level recommendations for Bellabeat’s marketing strategy 
- Characters and products 
- 
- **● Characters**
- 
- **○ UrškaSršen:** Bellabeat’s cofounder and Chief Creative Officer 
- 
- **○ SandoMur:** Mathematician and Bellabeat’s cofounder; key member of the Bellabeat executive team 
- 
- **○ Bellabeat marketing analytics team:** A team of data analysts responsible for collecting, analyzing, and repo ing
- data that helps guide Bellabeat’s marketing strategy. You joined this team six months ago and have been busy
- learning about Bellabeat’’s mission and business goals — as well as how you, as a junior data analyst, can help
- Bellabeat achieve them. 
- 
- **● Products** 
- 
- **○ Bellabeat app:** The Bellabeat app provides users with health data related to their activity, sleep, stress,
- menstrual cycle, and mindfulness habits. This data can help users be er understand their current habits and
- make healthy decisions. The Bellabeat app connects to their line of sma wellness products. 
- 
- **○ Leaf:** Bellabeat’s classic wellness tracker can be worn as a bracelet, necklace, or clip. The Leaf tracker connects
- to the Bellabeat app to track activity, sleep, and stress. 
- 
- **○ Time:** Thiswellness watch combines the timeless look of a classic timepiece with sma technology to track user
- activity, sleep, and stress. The Time watch connects to the Bellabeat app to provide you with insights into your
- daily wellness. 
- 
-**○ Spring:** This is a water bo le that tracks daily water intake using sma technology to ensure that you are
- appropriately hydrated throughout the day. The Spring bo le connects to the Bellabeat app to track your
- hydration levels. 
- 
- **○ Bellabeat membership:** Bellabeat also o ers a subscription-based membership program for users.
- Membership gives users 24/7 access to fully personalized guidance on nutrition, activity, sleep, health and
- beauty, and mindfulness based on their lifestyle and goals. 
+Urška Sršen: Bellabeat's cofounder and Chief Creative Officer.
+Sando Mur: Mathematician and Bellabeat cofounder; a key member of the executive team.
+Bellabeat Marketing Analytics Team: The team you will be delivering your findings to.
+Guiding Questions to Answer:
 
-  ---------------------------------------------------------------------------------------------------------------------------------------------------
-  ----------------------------------------------------------------------------------------------------------------------------------------------------
+What are the key trends in smart device usage (steps, sleep, calories, heart rate)?
+How do usage patterns differ across the week (weekdays vs. weekends)?
+Are there different types of users based on their activity levels? (e.g., Sedentary, Active, etc.)
+What is the relationship between different metrics, such as steps taken and calories burned, or activity levels and sleep quality?
+What insights can we find that will help guide Bellabeat's marketing strategy?
+# Step 2: PREPARE
+Here, we identify and describe the data we'll be using.
 
- ### **In BigQuery, I began by loading the data and then searching some basic information and initial findings such as number of unique IDs, total steps, and avg active minutes:**  
+Dataset: The FitBit Fitness Tracker Data available on Kaggle. This dataset contains 18 CSV files with daily, hourly, and minute-level data from approximately 30 anonymous Fitbit users from 2016.
 
-  ----------------------------------------------------------------------------------------------------------------------------------------- 
+Tool Selection & Data Location:
 
- ## LOADED DATA 
+Original Data: Download the CSV files from Kaggle and store them in a dedicated folder.
+Initial Exploration (Excel): Use Excel to open a few key files (like dailyActivity_merged.csv and sleepDay_merged.csv) to get a "feel" for the data. You can quickly view the columns, number of rows, and data formats.
+Data Warehouse (BigQuery): Upload the primary CSV files (e.g., dailyActivity_merged, sleepDay_merged, hourlySteps_merged) to Google BigQuery. This will be our primary tool for cleaning, transforming, and merging the data using SQL.
+Data Limitations (Important for your final report):
 
- ![Load Data](images/BigQuery/Loaded_Daily_Activity_3.12-4.12.png) 
+Sample Size: The data is from only ~30 users, which is not representative of the entire population of smart device users.
+Demographics: We lack crucial demographic information like age, gender, location, and income, which limits the depth of our marketing recommendations.
+Currency: The data is from 2016. Usage patterns may have changed significantly since then.
+Self-Reported Data: Some data points, like sleep, can be manually entered and may not be entirely accurate.
+# Step 3: PROCESS
+This is the data cleaning phase. Our goal is to ensure the data is accurate, consistent, and ready for analysis. We will primarily use BigQuery (SQL) for this.
 
--------------------------------------------------------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------------------------------------------------------
+Inspect and Identify Issues:
+Check for NULLs: Use COUNTIF(column_name IS NULL) to check for missing values in key columns.
+Check for Duplicates: Use GROUP BY Id, ActivityDate HAVING COUNT(*) > 1 to find duplicate entries for the same user on the same day.
+Formatting: Ensure date/time columns are in a consistent format. BigQuery is generally good at this, but you may need to use FORMAT_TIMESTAMP or PARSE_DATE.
+Clean and Transform the Data:
+Action: Create a new, clean table in BigQuery.
+Let's join the daily activity and daily sleep tables.
+<!-- end list -->
+-- This query joins daily activity and sleep data, and removes duplicates.
+CREATE OR REPLACE TABLE `your_project.bellabeat_analysis.daily_activity_sleep` AS (
+  SELECT
+    activity.Id,
+    activity.ActivityDate,
+    -- Use DISTINCT to handle potential duplicates from the source tables
+    DISTINCT
+    activity.TotalSteps,
+    activity.TotalDistance,
+    activity.TrackerDistance,
+    activity.VeryActiveMinutes,
+    activity.FairlyActiveMinutes,
+    activity.LightlyActiveMinutes,
+    activity.SedentaryMinutes,
+    activity.Calories,
+    sleep.TotalMinutesAsleep,
+    sleep.TotalTimeInBed
+  FROM
+    `your_project.bellabeat_analysis.dailyActivity_merged` AS activity
+  LEFT JOIN
+    `your_project.bellabeat_analysis.sleepDay_merged` AS sleep
+  ON
+    activity.Id = sleep.Id AND activity.ActivityDate = sleep.SleepDay
+);
 
- ## TOTAL UNIQUE IDS
+# Step 4: ANALYZE
+Now for the exciting part. We will use Python for statistical analysis and modeling, and BigQuery for aggregations.
+
+Descriptive Statistics:
+Goal: Calculate summary statistics (mean, median, min, max) for our key metrics.
+BigQuery SQL:
+SELECT
+  AVG(TotalSteps) AS avg_steps,
+  AVG(TotalMinutesAsleep) AS avg_sleep_minutes,
+  AVG(SedentaryMinutes) AS avg_sedentary_minutes,
+  AVG(Calories) AS avg_calories
+FROM
+  `your_project.bellabeat_analysis.daily_activity_sleep`;
+Python (using Pandas):
+import pandas as pd
+
+df = pd.read_csv('cleaned_daily_data.csv')
+print(df[['TotalSteps', 'TotalMinutesAsleep', 'SedentaryMinutes', 'Calories']].describe())
+Identify Trends:
+Goal: Analyze activity by day of the week.
+BigQuery SQL:
+SELECT
+  FORMAT_TIMESTAMP('%A', TIMESTAMP(ActivityDate)) AS day_of_week,
+  AVG(TotalSteps) AS avg_steps,
+  AVG(TotalMinutesAsleep) AS avg_sleep
+FROM
+  `your_project.bellabeat_analysis.daily_activity_sleep`
+GROUP BY
+  day_of_week
+ORDER BY
+  -- Custom order to get Sunday, Monday, Tuesday...
+  CASE day_of_week
+    WHEN 'Sunday' THEN 1
+    WHEN 'Monday' THEN 2
+    WHEN 'Tuesday' THEN 3
+    WHEN 'Wednesday' THEN 4
+    WHEN 'Thursday' THEN 5
+    WHEN 'Friday' THEN 6
+    WHEN 'Saturday' THEN 7
+  END;
+Potential Finding: Users might be more active on weekends or specific weekdays.
+Correlation Analysis (Python):
+Goal: Understand the strength of the relationship between variables. A correlation coefficient (r) ranges from -1 to 1.
+Python (using Pandas, Matplotlib, and Seaborn):
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Select only the numeric columns for correlation
+correlation_df = df[['TotalSteps', 'TotalDistance', 'VeryActiveMinutes', 'SedentaryMinutes', 'Calories', 'TotalMinutesAsleep']]
+
+# Calculate the correlation matrix
+corr_matrix = correlation_df.corr()
+
+# Plot a heatmap
+plt.figure(figsize=(10, 8))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Correlation Matrix of Fitbit User Metrics')
+plt.show()
+Likely Finding: You'll see a very strong positive correlation (r \> 0.8) between TotalSteps and Calories. You might also find a weak negative correlation between SedentaryMinutes and TotalMinutesAsleep, suggesting that people who sit more may sleep less.
+Simple Model to Show a Pattern (Python):
+Goal: Show a clear, predictable pattern. A simple linear regression is perfect for this. Let's model the relationship between TotalSteps and Calories.
+Python (using scikit-learn):
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Prepare the data
+X = df[['TotalSteps']].dropna() # Feature
+y = df[['Calories']].loc[X.index] # Target, ensure it matches the dropped NA rows from X
+
+# Create and fit the model
+model = LinearRegression()
+model.fit(X, y)
+
+# Get the coefficient and intercept
+# The coefficient tells you how many more calories are burned for each additional step.
+coefficient = model.coef_[0][0]
+intercept = model.intercept_[0]
+
+print(f"Model: Calories = {intercept:.2f} + {coefficient:.4f} * TotalSteps")
+
+# You can also visualize this easily
+plt.figure(figsize=(10, 6))
+sns.scatterplot(x='TotalSteps', y='Calories', data=df, alpha=0.5)
+plt.plot(X, model.predict(X), color='red', linewidth=2)
+plt.title('Calories Burned vs. Total Steps')
+plt.xlabel('Total Steps')
+plt.ylabel('Calories Burned')
+plt.show()
+Interpretation: The red line shows the trend. The formula Calories = Intercept + Coefficient * TotalSteps allows you to predict calories burned based on steps. This is a powerful way to show stakeholders a clear pattern.
+# Step 5: SHARE
+This is where you create visualizations and a narrative to present your findings. Tableau is the best tool for this.
 
 
-![Count Distinct IDs](/images/BigQuery/Count_Distinct_IDs_Query.png) 
+KPIs: Uses "Big Number" cards to show key metrics like Avg. Daily Steps, Avg. Daily Sleep, and Avg. Sedentary Minutes.
+Bar Chart: Shows Avg. Steps by Day of the Week.
+Scatter Plot: Plotted TotalMinutesAsleep vs. VeryActiveMinutes to visually explore their relationship. Color the dots by User ID.
+Pie Chart: Created user segments based on average daily steps (e.g., Sedentary: <5000, Lightly Active: 5000-7499, Fairly Active: 7500-9999, Very Active: >10,000) and show the percentage of users in each segment.
+Tree Map: Shows which activity type (Sedentary, Lightly, Fairly, Very Active) constitutes the most minutes per day on average.
+# Step 6: ACT
+This is the final step: providing actionable recommendations based on your analysis.
 
-------------------------------------------------------------------------------------------------------------------------------------------------------
+Insight: A large portion of the day is spent sedentary, even for active users.
+Recommendation: Bellabeat could implement "move reminders" in their app. Market this as a feature that helps users break up long periods of inactivity to improve overall health.
+Insight: There's a (potential) relationship between activity and sleep. Users who are more active may have better sleep patterns.
+Recommendation: Create in-app educational content and marketing blog posts titled "Move More, Sleep Better: The Science of Activity and Rest" to position Bellabeat as a holistic wellness partner, not just a fitness tracker.
+Insight: Users are most active on average around 5-7 PM, but step counts might drop on weekends. (This is a hypothetical finding you should verify).
+Recommendation: Bellabeat could launch a "Weekend Warrior" marketing campaign with in-app challenges and rewards for hitting step goals on Saturdays and Sundays, encouraging consistent engagement.
+GitHub File Structure
+To organize your project professionally, use the following structure. This is clean, scalable, and easy for others (or your future self) to understand.
 
-![Count Distinct IDs Result](/images/BigQuery/Count_Distinct_IDs_Query_Result_of_35.png)
-
-----------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------
-## TOTAL STEPS TOP 10
-
- ![Total Steps](/images/BigQuery/Query_Total_Steps_per_user_Top10.png) 
-
- ---------------------------------------------------------------------------------------------------------------------------------------------------
- ![Total Steps Results](/images/BigQuery/Query_Total_Steps_per_user_Top10_Result.png)  
- 
- ---------------------------------------------------------------------------------------------------------------------------------------------------
- ----------------------------------------------------------------------------------------------------------------------------------------------------
-
-  ## AVG ACTIVE MINUTES 
-
-  
-  ![Avg Active Minutes](/images/BigQuery/Query_Avg_Active_Minutes_per_user.png) 
-
- -------------------------------------------------------------------------------------------------------------------------------------------------- 
- **(Ran code without "limit 10" in order to retrieve all users):**
-  ![Avg Active Minutes Result](images/BigQuery/Query_Avg_Active_Minutes_per_user_Result_without_limit.png)
-  
----------------------------------------------------------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------------------------------------------------------
-
- ### Then I ran a couple queries looking for patterns or trends: 
-
-### Calculating the percent of days users achieved their 10,000 step goal 
-
- ![Percent of users met step goal](/images/BigQuery/Query_percent_days_user_met_step_goal.png) 
-
- -----------------------------------------------------------------------------------------------------------------------------------------------------
-
- ### Average steps by day of the week
- 
-  ![Avg steps by day of week](/images/BigQuery/Query_step_trend_by_day_of_week.png)
-
-  --------------------------------------------------------------------------------------------------------------------------------------------------
-  ### Counting total column count for entire uploaded data set
-  ![Total column count by schema](/images/BigQuery/access_all_data_schema_id_check.png)
+bellabeat_google_capstone/
+├── .gitignore               # To ignore files that shouldn't be on GitHub
+├── README.md                # Project overview, findings, and instructions
+|
+├── 00_data/
+│   ├── original_data/       # Raw, downloaded Kaggle CSVs here
+│   │   ├── dailyActivity_merged.csv
+│   │   └── ...
+│   └── processed_data/      # Cleaned/merged CSVs
+│       └── daily_activity_sleep_cleaned.csv
+|
+├── 01_scripts/
+│   ├── sql/                 # BigQuery SQL scripts
+│   │   └── 01_data_cleaning_and_merge.sql
+│   └── python/              # Python scripts or notebooks
+│       └── Bellabeat_Analysis.ipynb
+|
+├── 02_visualizations/
+│   ├── images/              # Exported charts from Python/Tableau
+│   │   ├── correlation_heatmap.png
+│   │   └── steps_vs_calories_regression.png
+│   └── Bellabeat_Dashboard.twbx # Packaged Tableau Workbook
+|
+└── 03_report/
+    └── Bellabeat_Case_Study_Presentation.pptx  # The final presentation for stakeholders
